@@ -1,0 +1,20 @@
+.page {
+  min-height: 100%;
+  display: grid;
+}
+
+.page-web {
+  grid-template-rows: auto 1fr;
+}
+
+.page-center {
+  grid-template-rows: 1fr;
+  place-items: center;
+}
+
+.error-page {
+  & i {
+    font-size: 7rem;
+    color: $danger;
+  }
+}

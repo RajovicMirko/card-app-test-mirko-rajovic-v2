@@ -1,0 +1,83 @@
+.credit-card {
+  position: relative;
+  width: 400px;
+  height: 250px;
+  border-radius: 15px;
+  margin-bottom: 2rem;
+  // background-color: #f3f3f3;
+  background: rgba(119, 129, 156, 1);
+  background: linear-gradient(
+    110deg,
+    rgba(119, 129, 156, 0.8) 0%,
+    rgba(166, 174, 193, 1) 30%,
+    rgba(213, 219, 230, 1) 100%
+  );
+  box-shadow: 3px 3px 5px 0px rgba(0, 0, 0, 0.3);
+
+  &-add {
+    @extend .credit-card;
+    font-size: 5rem;
+  }
+
+  & .card-logo {
+    & img {
+      &.visa {
+        position: absolute;
+        top: -30px;
+        width: 150px;
+        right: 10px;
+      }
+
+      &.discover {
+        position: absolute;
+        top: 25px;
+        width: 150px;
+        right: 30px;
+      }
+
+      &.master {
+        position: absolute;
+        top: 25px;
+        width: 100px;
+        right: 30px;
+      }
+    }
+  }
+
+  & .card-chip {
+    & img {
+      position: absolute;
+      top: 55px;
+      left: 30px;
+      width: 50px;
+    }
+  }
+
+  & .card-number {
+    position: absolute;
+    top: 120px;
+    text-align: center;
+    width: 100%;
+    & h2 {
+      font-size: 2.2rem;
+    }
+  }
+
+  & .credit-card-footer {
+    position: absolute;
+    width: 100%;
+    bottom: 30px;
+    padding: 0 30px;
+    text-transform: uppercase;
+
+    & .footer-wrapper {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+    }
+  }
+
+  &:hover {
+    transform: scale(1.03);
+  }
+}

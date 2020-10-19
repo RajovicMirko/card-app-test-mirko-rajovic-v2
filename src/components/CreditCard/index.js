@@ -9,22 +9,23 @@ import masterLogo from '../../assets/files_1050346_1023544_mastercard-eb92151998
 import cardChip from '../../assets/files_1050346_1023544_chip-8feb50fbaf1103ec7e20e39eb13c98fa-3dcbaa.png'
 
 function index(props) {
-  const { fullName, cardType, cardNumber, expDate, handleClick} = props;
+  const { fullName, cardNumber, expDate, handleClick} = props;
+  const firstCardNumberDigit = cardNumber[0];
 
   const logoMap = {
-    "visa": visaLogo,
-    "discover": discoverLogo,
-    "master": masterLogo,
+    "4": visaLogo,
+    "5": masterLogo,
+    "6": discoverLogo,
   }
   
   const getLogo = () => {
-    return logoMap[cardType];
+    return logoMap[firstCardNumberDigit];
   }
 
   return (
     <div className="credit-card" onClick={handleClick}>
       <div className="card-logo">
-        { cardType && <img className={cardType} src={getLogo()} alt="Card logo" /> }
+        { firstCardNumberDigit && <img className={`card-${firstCardNumberDigit}`} src={getLogo()} alt="Card logo" /> }
       </div>
       <div className="card-chip">
         <img src={cardChip} alt="Card chip" />

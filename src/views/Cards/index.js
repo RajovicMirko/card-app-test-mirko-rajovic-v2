@@ -22,7 +22,6 @@ function Cards(props) {
                 fullName={card.fullName}
                 cardNumber={card.cardNumber}
                 expDate={card.expDate}
-                cardType={card.cardType}
                 handleClick={() => history.push(`/cards/${card.id}/edit`)}
               />
             )

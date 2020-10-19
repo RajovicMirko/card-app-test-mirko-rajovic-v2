@@ -20,24 +20,24 @@
 
   & .card-logo {
     & img {
-      &.visa {
+      &.card-4 {
         position: absolute;
         top: -30px;
         width: 150px;
         right: 10px;
       }
 
-      &.discover {
-        position: absolute;
-        top: 25px;
-        width: 150px;
-        right: 30px;
-      }
-
-      &.master {
+      &.card-5 {
         position: absolute;
         top: 25px;
         width: 100px;
+        right: 30px;
+      }
+
+      &.card-6 {
+        position: absolute;
+        top: 25px;
+        width: 150px;
         right: 30px;
       }
     }

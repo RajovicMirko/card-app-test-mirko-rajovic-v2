@@ -12,14 +12,6 @@ export const creditCardForm = (state, handleChange) => {
       error: errors.fullName,
       onChange: handleChange
     },
-    { 
-      component: 'select-card-type',
-      id: "cardType",
-      label: "Card type",
-      addClassLabel: 'mb-0',
-      cardType: inputs.cardType,
-      onChange: handleChange
-    },
     {
       component: 'input-card-number',
       id: "cardNumber",

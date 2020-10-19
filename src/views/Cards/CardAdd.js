@@ -20,7 +20,6 @@ class index extends Component {
         fullName: '',
         cardNumber: '',
         expDate: '',
-        cardType: 'visa'
       },
       rules: {
         fullName: {

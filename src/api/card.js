@@ -1,5 +1,16 @@
 const WAIT_TIME = 1000;
 
+const addCard = (state, data) => {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      const newCards = state.cards.cards;
+      newCards.push(data)
+
+      resolve(newCards)
+    }, WAIT_TIME);
+  })
+}
+
 const editCard = (state, data) => {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
@@ -16,18 +27,7 @@ const editCard = (state, data) => {
   })
 }
 
-const addCard = (state, data) => {
-  return new Promise((resolve, reject) => {
-    setTimeout(() => {
-      const newCards = state.cards.cards;
-      newCards.push(data)
-
-      resolve(newCards)
-    }, WAIT_TIME);
-  })
-}
-
 export default {
-  editCard,
-  addCard
+  addCard,
+  editCard
 }

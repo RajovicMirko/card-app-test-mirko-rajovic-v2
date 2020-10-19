@@ -10,12 +10,15 @@ export default class FormValidation {
   _validationRules = {
     required: (val) => !!val,
     min: (val, length) => val && val.length >= length,
-    cardNumberFirstDigit: (val) => {
-      const pattern = /^(4|5|6)$/
+    cardNumberFirstDigit: (val, numbersArray) => {
+      const numbersPattern = numbersArray.join("|");
+      const fullPattern = `^(${numbersPattern})$`
+      const pattern = new RegExp(fullPattern) 
+      
       return pattern.test(val[0]);
     },
     cardNumber: (val) => {
-      const pattern = /^(4|5|6){1}[0-9]{3}\s[0-9]{4}\s[0-9]{4}\s[0-9]{4}$/
+      const pattern = /^[0-9]{4}\s[0-9]{4}\s[0-9]{4}\s[0-9]{4}$/;
       return pattern.test(val);
     },
     exparationDate: (val) => {

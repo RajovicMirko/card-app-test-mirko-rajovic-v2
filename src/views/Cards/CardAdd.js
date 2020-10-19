@@ -28,7 +28,7 @@ class index extends Component {
           min: { value: 6, message: 'Must be at least 6 characters long'}
         },
         cardNumber: {
-          cardNumberFirstDigit: { message: "First digit must be 4, 5 or 6"},
+          cardNumberFirstDigit: { value: [4, 5, 6], message: "First digit must be 4, 5 or 6"},
           cardNumber: { message: 'Wrong card number'}
         },
         expDate: {

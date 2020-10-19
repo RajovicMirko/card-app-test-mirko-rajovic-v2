@@ -22,7 +22,7 @@ class index extends Component {
           min: { value: 6, message: 'Must be at least 6 characters long'}
         },
         cardNumber: {
-          cardNumberFirstDigit: { message: "First digit must be 4, 5 or 6"},
+          cardNumberFirstDigit: { value: [4, 5, 6], message: "First digit must be 4, 5 or 6"},
           cardNumber: { message: 'Wrong card number'}
         },
         expDate: {
@@ -80,7 +80,6 @@ class index extends Component {
           {
             getComponent({
               component: "form",
-              // title: "Form test title",
               addClass: "w-100",
               onSubmit: this.handleSubmit,
               addClassTitle: "text-center text-primary",
@@ -99,6 +98,7 @@ class index extends Component {
 const mapStateToProps = (state, ownProps) => {
   const cardId = ownProps.match.params.id;
   const card = state.cards.cards.find(card => card.id === cardId)
+  
   return {
     card,
     isLoading: state.cards.isLoading

@@ -35,6 +35,8 @@ class index extends Component {
               )
             })}
 
+            { cards.length === 1 && <div className='w-100' /> }
+
             { getComponent({
               component: 'credit-card-add'
             })}

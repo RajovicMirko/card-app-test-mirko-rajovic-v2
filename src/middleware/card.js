@@ -1,7 +1,7 @@
 import { LocalStorage } from '../utils/localStorage';
 
-const WAIT_TIME = 500;
-const LS_CARDS_KEY = 'cards'
+const WAIT_TIME = process.env.REACT_APP_GL_WAIT_TIME;
+const LS_CARDS_KEY = process.env.REACT_APP_LS_CARDS_KEY
 
 const getCards = () => {
   return new Promise((resolve, reject) => {

@@ -36,7 +36,7 @@ class index extends Component {
             })}
 
             { !cards.length && <div className="w-100 text-center mb-2"><span className="h6 text-muted">Welcome, start adding your cards.</span></div>}
-
+            
             { cards.length <= 1 && <div className='w-100' /> }
 
             { getComponent({

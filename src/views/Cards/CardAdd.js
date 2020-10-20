@@ -13,8 +13,8 @@ import { creditCardForm } from '../../components/CreditCardForm';
 import { addCard } from '../../store/actions/cards'
 
 class index extends Component {
-  constructor(){
-    super();
+  constructor(props){
+    super(props);
     this.state = {
       inputs: {
         fullName: '',
@@ -27,7 +27,7 @@ class index extends Component {
           min: { value: 6, message: 'Must be at least 6 characters long'}
         },
         cardNumber: {
-          cardNumberFirstDigit: { value: [4, 5, 6], message: "First digit must be 4, 5 or 6"},
+          cardNumberFirstDigit: { value: props.cardNumberFirstDigitArray, message: `First digit must be ${props.cardNumberFirstDigitArray.join(", ")}`},
           cardNumber: { message: 'Wrong card number'}
         },
         expDate: {
@@ -105,6 +105,7 @@ class index extends Component {
 
 const mapStateToProps = (state) => {
   return {
+    cardNumberFirstDigitArray: Object.keys(state.cards.logos),
     isLoading: state.cards.isLoading
   }
 } 

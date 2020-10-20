@@ -9,7 +9,7 @@ import masterLogo from '../../assets/files_1050346_1023544_mastercard-eb92151998
 import cardChip from '../../assets/files_1050346_1023544_chip-8feb50fbaf1103ec7e20e39eb13c98fa-3dcbaa.png'
 
 function index(props) {
-  const { fullName, cardNumber, expDate, handleClick} = props;
+  const { fullName, cardNumber = 0, expDate, handleClick} = props;
   const firstCardNumberDigit = cardNumber[0];
 
   const logoMap = {

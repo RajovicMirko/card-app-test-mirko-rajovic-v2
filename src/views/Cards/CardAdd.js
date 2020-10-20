@@ -87,7 +87,6 @@ class index extends Component {
           {
             getComponent({
               component: "form",
-              // title: "Add new credit card",
               addClass: "w-100",
               onSubmit: this.handleSubmit,
               addClassTitle: "text-center text-primary",

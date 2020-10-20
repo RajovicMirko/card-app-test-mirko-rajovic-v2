@@ -5,7 +5,7 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 
 // API MIDDLEWARE LIKE
-import apiCard from './api/card'
+import apiCard from './middleware/card'
 
 // STORE
 import { createStore, applyMiddleware } from "redux";

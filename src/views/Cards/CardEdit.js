@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-import { withRouter } from 'react-router-dom'
+import { withRouter, Redirect } from 'react-router-dom'
 import {connect} from 'react-redux'
 
 // COMPONENTS
@@ -9,6 +9,7 @@ import FormValidation from '../../components/global/form/validation';
 import { creditCardForm } from '../../components/CreditCard/Form';
 
 // ACTIONS
+import { getCards } from '../../store/actions/cards';
 import { editCard } from '../../store/actions/cards'
 
 class index extends Component {
@@ -67,7 +68,9 @@ class index extends Component {
 
   render() {
     const { inputs } = this.state;
-    const { isLoading } = this.props;
+    const { isLoading, card } = this.props;
+
+    if(!card) return <Redirect to="/" />
 
     return (
       <div className="container">
@@ -100,6 +103,7 @@ const mapStateToProps = (state, ownProps) => {
   const card = state.cards.cards.find(card => card.id === cardId)
   
   return {
+    cards: state.cards.cards,
     card,
     cardNumberFirstDigitArray: Object.keys(state.cards.logos),
     isLoading: state.cards.isLoading
@@ -108,6 +112,7 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
+    getCards: () => dispatch(getCards()),
     editCard: (data) => dispatch(editCard(data))
   }
 }

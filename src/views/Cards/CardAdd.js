@@ -12,7 +12,7 @@ import { creditCardForm } from '../../components/CreditCard/Form';
 // ACTIONS
 import { addCard } from '../../store/actions/cards'
 
-class index extends Component {
+class CardAddPage extends Component {
   constructor(props){
     super(props);
     this.state = {
@@ -116,4 +116,4 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(withRouter(index))
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(CardAddPage))

@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function index(props) {
+export default function Input(props) {
   const {
     id,
     type,

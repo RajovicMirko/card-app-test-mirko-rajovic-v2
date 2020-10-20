@@ -8,7 +8,7 @@ import { getCards } from '../../store/actions/cards';
 // COMPONENTS
 import { getComponent } from '../../components/componentsMap';
 
-class index extends Component {
+class CardsPage extends Component {
   componentDidMount(){
     if(!this.props.cards.length) this.props.getCards();
   }
@@ -64,4 +64,4 @@ const mapDispatchToProps = (dispatch) => {
   }
 } 
 
-export default connect(mapStateToProps, mapDispatchToProps)(index)
+export default connect(mapStateToProps, mapDispatchToProps)(CardsPage)

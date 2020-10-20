@@ -2,7 +2,7 @@ import React from 'react'
 
 import { withRouter } from 'react-router-dom'
 
-function index(props) {
+function CreditCardAdd(props) {
   const { history } = props;
   
   const handleClick = () => {
@@ -16,4 +16,4 @@ function index(props) {
   )
 }
 
-export default withRouter(index)
+export default withRouter(CreditCardAdd)

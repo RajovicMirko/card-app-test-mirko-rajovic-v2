@@ -3,7 +3,7 @@ import React from 'react'
 import Title from './title'
 import { getComponent } from '../../componentsMap'
 
-function index(props) {
+function Form(props) {
   const { addClass, onSubmit, title, addClassTitle, children } = props;
   
   return (
@@ -18,4 +18,4 @@ function index(props) {
   )
 }
 
-export default index
+export default Form;

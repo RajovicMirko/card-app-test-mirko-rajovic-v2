@@ -6,7 +6,7 @@ import { connect } from "react-redux"
 
 import cardChip from '../../assets/files_1050346_1023544_chip-8feb50fbaf1103ec7e20e39eb13c98fa-3dcbaa.png'
 
-function index(props) {
+function CreditCard(props) {
   const { logos, fullName, cardNumber, expDate, handleClick} = props;
   const firstCardNumberDigit = cardNumber && cardNumber[0];
   
@@ -46,4 +46,4 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps)(withRouter(index));
+export default connect(mapStateToProps)(withRouter(CreditCard));

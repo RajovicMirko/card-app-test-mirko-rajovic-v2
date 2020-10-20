@@ -17,7 +17,8 @@ const initState = {
       name: 'discover', // ADDED BECOUSE OF CREDIT CARD LOGO CSS STYLEING
       logo: discoverLogo
     }
-  }
+  },
+  isLoading: false
 };
 
 const auth = (state = initState, action) => {

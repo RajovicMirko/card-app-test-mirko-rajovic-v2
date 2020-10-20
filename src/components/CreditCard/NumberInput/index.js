@@ -3,7 +3,7 @@ import React, { Component } from 'react'
 
 import Input from '../../global/input'
 
-export default class index extends Component {
+export default class CreditCardNumberInput extends Component {
   constructor(props){
     super(props)
     const num = props.cardNumber ? props.cardNumber.split(" ") : '';

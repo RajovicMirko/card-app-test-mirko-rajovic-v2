@@ -11,7 +11,7 @@ import { creditCardForm } from '../../components/CreditCard/Form';
 // ACTIONS
 import { editCard } from '../../store/actions/cards'
 
-class index extends Component {
+class CardEditPage extends Component {
   constructor(props){
     super(props);
     this.state = {
@@ -115,4 +115,4 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(withRouter(index))
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(CardEditPage))

@@ -32,6 +32,7 @@ export default function index(props) {
         value={value}
         maxLength={maxlength}
         onChange={onChange}
+        onFocus={(e) => e.target.select()}
       />
       {error && <small className="text-danger">{ error }</small> }
     </div>

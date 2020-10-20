@@ -21,10 +21,9 @@ export default class index extends Component {
 
     this.setState({ state })
 
-
     if(event.target.value.length === 4 && event.target.id !== 'cardNumber4'){
         const fieldNum = Number(event.target.id.slice(-1));
-        document.querySelector(`#cardNumber${fieldNum + 1}`).focus()
+        document.querySelector(`#cardNumber${fieldNum + 1}`).focus();
     }
 
     const { cardNumber1, cardNumber2, cardNumber3, cardNumber4 } = this.state;

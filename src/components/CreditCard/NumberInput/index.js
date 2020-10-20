@@ -1,7 +1,7 @@
 import './input-card-number.scss';
 import React, { Component } from 'react'
 
-import Input from '../input'
+import Input from '../../global/input'
 
 export default class index extends Component {
   constructor(props){

@@ -6,7 +6,7 @@ import {connect} from 'react-redux'
 // COMPONENTS
 import { getComponent } from '../../components/componentsMap';
 import FormValidation from '../../components/global/form/validation';
-import { creditCardForm } from '../../components/CreditCardForm';
+import { creditCardForm } from '../../components/CreditCard/Form';
 
 // ACTIONS
 import { editCard } from '../../store/actions/cards'

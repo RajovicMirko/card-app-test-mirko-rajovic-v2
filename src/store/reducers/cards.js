@@ -1,5 +1,5 @@
 const initState = {
-  cards: []
+  cards: [],
 };
 
 const auth = (state = initState, action) => {

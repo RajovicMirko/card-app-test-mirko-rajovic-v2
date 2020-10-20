@@ -23,7 +23,13 @@ export default class FormValidation {
     },
     exparationDate: (val) => {
       const pattern = /^(0[1-9]|1[0-2])\/?([0-9]{4}|[0-9]{2})$/;
-      return pattern.test(val)
+      if(pattern.test(val)){
+        const userDateStr = val.replace('/', '/01/');
+        const userDate = new Date(userDateStr);
+        
+        return new Date() < userDate
+      }
+      return false;
     }
   }
 

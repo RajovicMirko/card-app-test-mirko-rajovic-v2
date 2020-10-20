@@ -7,11 +7,11 @@
   background: rgba(119, 129, 156, 1);
   background: linear-gradient(
     110deg,
-    rgba(119, 129, 156, 0.8) 0%,
-    rgba(166, 174, 193, 1) 30%,
+    rgba(119, 129, 156, 0.9) 0% 15%,
+    rgba(166, 174, 193, 1) 40%,
     rgba(213, 219, 230, 1) 100%
   );
-  box-shadow: 3px 3px 5px 0px rgba(0, 0, 0, 0.3);
+  box-shadow: 3px 3px 8px 0px rgba(65, 47, 47, 0.5);
 
   &-add {
     @extend .credit-card;
@@ -78,5 +78,6 @@
 
   &:hover {
     transform: scale(1.03);
+    box-shadow: 5px 5px 8px 0px rgba(65, 47, 47, 0.5);
   }
 }

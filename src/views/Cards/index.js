@@ -10,7 +10,7 @@ import { getComponent } from '../../components/componentsMap';
 
 class index extends Component {
   componentDidMount(){
-    this.props.getCards();
+    if(!this.props.cards.length) this.props.getCards();
   }
 
   render() {

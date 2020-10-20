@@ -26,9 +26,10 @@ export default class FormValidation {
       if(pattern.test(val)){
         const userDateStr = val.replace('/', '/01/');
         const userDate = new Date(userDateStr);
-        
+
         return new Date() < userDate
       }
+      
       return false;
     }
   }

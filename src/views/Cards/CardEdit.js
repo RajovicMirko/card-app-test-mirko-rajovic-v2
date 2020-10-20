@@ -9,7 +9,6 @@ import FormValidation from '../../components/global/form/validation';
 import { creditCardForm } from '../../components/CreditCard/Form';
 
 // ACTIONS
-import { getCards } from '../../store/actions/cards';
 import { editCard } from '../../store/actions/cards'
 
 class index extends Component {
@@ -112,7 +111,6 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    getCards: () => dispatch(getCards()),
     editCard: (data) => dispatch(editCard(data))
   }
 }

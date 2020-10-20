@@ -21,7 +21,7 @@ class index extends Component {
         <div className="my-cards page page-center py-5">
           <h2 className="text-muted mb-5">My Cards</h2>
           <div className="cards-list d-flex flex-wrap justify-content-around">
-            { cards && cards.map(card => {
+          { !!cards.length && cards.map(card => {
               return (   
                 getComponent({
                   component: 'credit-card',
@@ -35,7 +35,9 @@ class index extends Component {
               )
             })}
 
-            { cards.length === 1 && <div className='w-100' /> }
+            { !cards.length && <div className="w-100 text-center mb-2"><span className="h6 text-muted">Welcome, start adding your cards.</span></div>}
+
+            { cards.length <= 1 && <div className='w-100' /> }
 
             { getComponent({
               component: 'credit-card-add'

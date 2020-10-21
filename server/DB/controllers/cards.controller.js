@@ -1,6 +1,20 @@
 const db = require("../");
 const Cards = db.cards;
 
+// Retrieve all Cards from the database.
+exports.findAll = (req, res) => {
+  Cards.find()
+    .then(data => {
+      res.status(200).send(data);
+    })
+    .catch(err => {
+      res.status(500).send({
+        message:
+          err.message || "Some error occurred while retrieving cards."
+      });
+    });
+};
+
 // Create and Save a new Card
 exports.create = async (req, res) => {
   // Validate request
@@ -23,19 +37,18 @@ exports.create = async (req, res) => {
   }
 };
 
-// Retrieve all Cards from the database.
-exports.findAll = (req, res) => {
-  const title = req.query.title;
-  var condition = title ? { title: { $regex: new RegExp(title), $options: "i" } } : {};
-
-  Cards.find(condition)
+// Delete all Cards from the database.
+exports.deleteAll = (req, res) => {
+  Cards.deleteMany({})
     .then(data => {
-      res.status(200).send(data);
+      res.send({
+        message: `${data.deletedCount} Cards were deleted successfully!`
+      });
     })
     .catch(err => {
       res.status(500).send({
         message:
-          err.message || "Some error occurred while retrieving cards."
+          err.message || "Some error occurred while removing all Cards."
       });
     });
 };
@@ -102,22 +115,6 @@ exports.delete = (req, res) => {
     .catch(err => {
       res.status(500).send({
         message: "Could not delete Card with id=" + id
-      });
-    });
-};
-
-// Delete all Cards from the database.
-exports.deleteAll = (req, res) => {
-  Cards.deleteMany({})
-    .then(data => {
-      res.send({
-        message: `${data.deletedCount} Cards were deleted successfully!`
-      });
-    })
-    .catch(err => {
-      res.status(500).send({
-        message:
-          err.message || "Some error occurred while removing all Cards."
       });
     });
 };

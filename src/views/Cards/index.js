@@ -10,7 +10,7 @@ import { getComponent } from '../../components/componentsMap';
 
 class CardsPage extends Component {
   componentDidMount(){
-    if(!this.props.cards.length) this.props.getCards();
+    if(!this.props.cards) this.props.getCards();
   }
 
   render() {
@@ -21,7 +21,7 @@ class CardsPage extends Component {
         <div className="my-cards page page-center py-5">
           <h2 className="text-muted mb-5">My Cards</h2>
           <div className="cards-list d-flex flex-wrap justify-content-around">
-          { !!cards.length && cards.map(card => {
+          { !!cards && cards.map(card => {
               return (   
                 getComponent({
                   component: 'credit-card',
@@ -35,9 +35,9 @@ class CardsPage extends Component {
               )
             })}
 
-            { !cards.length && <div className="w-100 text-center mb-2"><span className="h6 text-muted">Welcome, start adding your cards.</span></div>}
+            { !cards && <div className="w-100 text-center mb-2"><span className="h6 text-muted">Welcome, start adding your cards.</span></div>}
             
-            { cards.length <= 1 && <div className='w-100' /> }
+            { cards && cards.length <= 1 && <div className='w-100' /> }
 
             { getComponent({
               component: 'credit-card-add'

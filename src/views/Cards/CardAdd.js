@@ -1,8 +1,6 @@
-import React, { Component } from 'react'
-import { v4 as uuidv4 } from 'uuid';
-
-import { withRouter } from 'react-router-dom'
-import {connect} from 'react-redux'
+import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
+import {connect} from 'react-redux';
 
 // COMPONENTS
 import { getComponent } from '../../components/componentsMap';
@@ -60,10 +58,8 @@ class CardAddPage extends Component {
     const inputs = this.state.inputs;
 
     if(this.validate()){
-      const data = { id: uuidv4(), ...inputs }
-      
       const { history, addCard } = this.props;
-      const done = await addCard({ ...data });
+      const done = await addCard({ ...inputs });
       if(done) {
         this.setState({ inputs: {} });
         history.push('/cards');
@@ -93,7 +89,6 @@ class CardAddPage extends Component {
               children: creditCardForm(this.state, this.handleChange)
             })
           }
-
 
           { getComponent({ component: 'loading-full-page', isLoading, colors: ['red', 'green', 'blue'] }) }
         </div>

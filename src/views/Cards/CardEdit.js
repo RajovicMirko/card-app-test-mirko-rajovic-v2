@@ -55,9 +55,9 @@ class CardEditPage extends Component {
     const inputs = this.state.inputs;
     
     if(this.validate()){
-
       const { history, editCard } = this.props;
       const done = await editCard({ ...inputs });
+      
       if(done){
         this.setState({ inputs: {} });
         history.push('/cards');
@@ -99,10 +99,11 @@ class CardEditPage extends Component {
 
 const mapStateToProps = (state, ownProps) => {
   const cardId = ownProps.match.params.id;
-  const card = state.cards.cards.find(card => card.id === cardId)
+  const cards = state.cards.cards;
+  const card = cards && cards.find(card => card.id === cardId)
   
   return {
-    cards: state.cards.cards,
+    cards,
     card,
     cardNumberFirstDigitArray: Object.keys(state.cards.logos),
     isLoading: state.cards.isLoading

@@ -3,7 +3,7 @@ import discoverLogo from '../../assets/files_1050346_1023544_discovercard-166021
 import masterLogo from '../../assets/files_1050346_1023544_mastercard-eb9215199829ef5e3ad671b7b3289480-ce80c8.png'
 
 const initState = {
-  cards: [],
+  cards: null,
   logos: {
     "4": {
       name: 'visa', // ADDED BECOUSE OF CREDIT CARD LOGO CSS STYLEING
@@ -23,6 +23,7 @@ const initState = {
 
 const auth = (state = initState, action) => {
   const { type, payload } = action;
+  let cards = null;
 
   switch (type) {
     // GET CARDS REDUCER
@@ -39,7 +40,7 @@ const auth = (state = initState, action) => {
     case "GET_CARDS_SUCCESS":
       return {
         ...state,
-        cards: payload ? payload : [] ,
+        cards: payload.length ? payload : null,
         isLoading: false
       }
 
@@ -55,9 +56,12 @@ const auth = (state = initState, action) => {
         isLoading: false
       }
     case "ADD_CARD_SUCCESS":
+      cards = state.cards;
+      cards.push(payload);
+
       return { 
         ...state,
-        cards: payload,
+        cards,
         isLoading: false
       }
 
@@ -75,7 +79,7 @@ const auth = (state = initState, action) => {
     case "EDIT_CARD_SUCCESS":
       return {
         ...state,
-        cards: payload,
+        cards: null,
         isLoading: false
       }
   

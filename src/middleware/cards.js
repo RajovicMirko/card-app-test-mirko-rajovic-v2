@@ -1,45 +1,36 @@
-import { LocalStorage } from '../utils/localStorage';
+import http from '../utils/axios';
 
-const WAIT_TIME = process.env.REACT_APP_GL_WAIT_TIME;
-const LS_CARDS_KEY = process.env.REACT_APP_LS_CARDS_KEY
+const getCards = async () => {
+  try {
+    const url = '/cards';
+    const payload = await http('get', url);
+    return payload.data;
 
-const getCards = () => {
-  return new Promise((resolve, reject) => {
-    setTimeout(() => {
-      const data = LocalStorage.get(LS_CARDS_KEY)
-      resolve(data);
-    }, WAIT_TIME);
-  })
+  } catch (error) {
+    return error;
+  }
 }
 
-const addCard = (state, data) => {
-  return new Promise((resolve, reject) => {
-    setTimeout(() => {
-      const newCards = state.cards.cards;
-      newCards.push(data)
+const addCard = async (data) => {
+  try {
+    const url = '/cards';
+    const payload = await http('post', url, data);
+    return payload.data;
 
-      LocalStorage.removeThenSet(LS_CARDS_KEY, newCards)
-      resolve(newCards)
-    }, WAIT_TIME);
-  })
+  } catch (error) {
+    return error;
+  }
 }
 
-const editCard = (state, data) => {
-  return new Promise((resolve, reject) => {
-    setTimeout(() => {
-      const localCards = state.cards.cards;
-      const newCards = localCards.map(card => {
-        if(card.id === data.id){
-          return data;
-        } else {
-          return card;
-        }
-      })
-      
-      LocalStorage.removeThenSet(LS_CARDS_KEY, newCards)
-      resolve(newCards)
-    }, WAIT_TIME)
-  })
+const editCard = async (data) => {
+  try {
+    const url = `/cards/${data.id}`;
+    const payload = await http('put', url, data);
+    return payload.data;
+    
+  } catch (error) {
+    return error;
+  }
 }
 
 export default {

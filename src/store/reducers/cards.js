@@ -56,7 +56,7 @@ const auth = (state = initState, action) => {
         isLoading: false
       }
     case "ADD_CARD_SUCCESS":
-      cards = state.cards;
+      cards = state.cards || [];
       cards.push(payload);
 
       return { 

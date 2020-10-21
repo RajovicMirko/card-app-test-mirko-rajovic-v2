@@ -1,8 +1,8 @@
 export const getCards = () => {
-  return async (dispatch, getState, { apiCard }) => {
+  return async (dispatch, getState, { api }) => {
     dispatch({ type: 'GET_CARDS' })
 
-    const payload = await apiCard.getCards();
+    const payload = await api.cards.getCards();
 
     if(payload){
       dispatch({ type: 'GET_CARDS_SUCCESS', payload});
@@ -15,11 +15,11 @@ export const getCards = () => {
 }
 
 export const addCard = (data) => {
-  return async (dispatch, getState, { apiCard }) => {
+  return async (dispatch, getState, { api }) => {
     if(data) {
       dispatch({ type: 'ADD_CARD' });
 
-      const payload = await apiCard.addCard(getState(), data);
+      const payload = await api.cards.addCard(getState(), data);
 
       if(payload){
         dispatch({ type: 'ADD_CARD_SUCCESS',  payload });
@@ -33,11 +33,11 @@ export const addCard = (data) => {
 };
 
 export const editCard = (data) => {
-  return async (dispatch, getState, { apiCard }) => {
+  return async (dispatch, getState, { api }) => {
     if(data) {
       dispatch({ type: 'EDIT_CARD' });
 
-      const payload = await apiCard.editCard(getState(), data);
+      const payload = await api.cards.editCard(getState(), data);
 
       if(payload){
         dispatch({ type: 'EDIT_CARD_SUCCESS',  payload });

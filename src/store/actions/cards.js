@@ -51,6 +51,25 @@ export const editCard = (data) => {
   }
 };
 
+export const deleteCard = (id) => {
+  return (dispatch, getState, { api }) => {
+    return new Promise(async (resolve, reject) => {
+      if(id) {
+        dispatch({ type: 'DELETE_CARD' });
+
+        const payload = await api.cards.deleteCard(id);
+        if(payload){
+          dispatch({ type: 'DELETE_CARD_SUCCESS', id });
+          resolve(true);
+        } else {
+          dispatch({ type: 'DELETE_CARD_ERROR' });
+          reject(false);
+        }
+      }
+    });
+  }
+};
+
 export const getCardById = (id) => {
   return (dispatch, getState, { api }) => {
     return new Promise(async (resolve, reject) => {

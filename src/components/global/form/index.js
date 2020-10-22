@@ -12,7 +12,7 @@ function Form(props) {
       onSubmit={onSubmit}
     >
       { title && <Title title={title} addClass={addClassTitle} /> }
-      { getComponent && children.map((field, i) => <React.Fragment key={i}>{ getComponent(field) }</React.Fragment>)}
+      { getComponent && children.map((field, i) => <React.Fragment key={i}>{ getComponent(field) }</React.Fragment>) }
       { !getComponent && children }
     </form>
   )

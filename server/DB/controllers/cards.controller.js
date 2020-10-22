@@ -80,7 +80,6 @@ exports.update = async (req, res) => {
   }
 
   const id = req.params.id;
-  console.log(req.body);
 
   try {
     const data = await Cards.findByIdAndUpdate(id, req.body, { useFindAndModify: false });
@@ -92,7 +91,6 @@ exports.update = async (req, res) => {
       res.status(200).send(data);
     }
   } catch (error) {
-    console.log(error);
     res.status(500).send({
       message: error.message || `Error updating Card with id=${id}`
     });
@@ -109,9 +107,7 @@ exports.delete = async (req, res) => {
         message: `Cannot delete Card with id=${id}. Maybe Card was not found!`
       });
     } else {
-      res.send({
-        message: "Card was deleted successfully!"
-      });
+      res.send(data);
     }
   } catch (error) {
     res.status(500).send({

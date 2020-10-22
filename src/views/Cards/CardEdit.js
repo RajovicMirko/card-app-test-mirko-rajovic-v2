@@ -6,10 +6,10 @@ import {connect} from 'react-redux'
 // COMPONENTS
 import { getComponent } from '../../components/componentsMap';
 import FormValidation from '../../components/global/form/validation';
-import { creditCardForm } from '../../components/CreditCard/Form';
+import { creditCardForm } from '../../components/CreditCard/Form/edit';
 
 // ACTIONS
-import { getCardById, editCard } from '../../store/actions/cards';
+import { getCardById, editCard, deleteCard } from '../../store/actions/cards';
 
 class CardEditPage extends Component {
   constructor(props){
@@ -57,6 +57,11 @@ class CardEditPage extends Component {
     return isValid;
   }
 
+  resetComponentAndPush = (path) => {
+    this.setState({ inputs: {} });
+    this.props.history.push(path);
+  }
+
   handleChange = (event) => {
     let inputs = this.state.inputs;
     const targetId = event.target.id;
@@ -68,16 +73,15 @@ class CardEditPage extends Component {
 
   handleSubmit = async (event) => {
     event.preventDefault();
-    const inputs = this.state.inputs;
     if(this.validate()){
-      const { history, editCard } = this.props;
-      const done = await editCard({ ...inputs });
-      
-      if(done){
-        this.setState({ inputs: {} });
-        history.push('/cards');
-      }
+      const done = await this.props.editCard({ ...this.state.inputs });
+      if(done) this.resetComponentAndPush('/cards');
     }
+  }
+
+  handleDelete = async () => {
+    const done = await this.props.deleteCard(this.state.inputs.id);
+    if(done) this.resetComponentAndPush('/cards');
   }
 
   render() {
@@ -98,7 +102,7 @@ class CardEditPage extends Component {
               addClass: "w-100",
               onSubmit: this.handleSubmit,
               addClassTitle: "text-center text-primary",
-              children: creditCardForm(this.state, this.handleChange),
+              children: creditCardForm(this.state, this.handleChange, this.handleDelete ),
             })
           }
 
@@ -121,7 +125,8 @@ const mapStateToProps = (state, ownProps) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     getCardById: (id) => dispatch(getCardById(id)),
-    editCard: (data) => dispatch(editCard(data))
+    editCard: (data) => dispatch(editCard(data)),
+    deleteCard: (id) => dispatch(deleteCard(id))
   }
 }
 

@@ -83,6 +83,25 @@ const auth = (state = initState, action) => {
         isLoading: false
       }
 
+      // DELETE CARD REDUCER
+      case "DELETE_CARD":
+        return {
+          ...state,
+          cards: null,
+          isLoading: true
+        }
+      case "DELETE_CARD_ERROR":
+        return {
+          ...state,
+          isLoading: false
+        }
+      case "DELETE_CARD_SUCCESS":
+        return {
+          ...state,
+          isLoading: false
+        }
+      
+      // GET CARD BY ID REDUCER
       case 'GET_CARD_BY_ID':
         return {
           ...state,

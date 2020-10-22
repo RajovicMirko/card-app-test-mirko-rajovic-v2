@@ -50,9 +50,22 @@ const getCardById = async (id) => {
   }
 }
 
+const deleteCard = async (id) => {
+  try {
+    const url = `/cards/${id}`;
+    const payload = await http('delete', url);
+    console.log(payload);
+    return payload.data;
+  } catch (error) {
+    return error;
+  }
+}
+
 export default {
   getCards,
   addCard,
   editCard,
-  getCardById
+
+  getCardById,
+  deleteCard,
 }

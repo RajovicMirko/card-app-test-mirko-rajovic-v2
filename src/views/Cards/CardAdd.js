@@ -67,7 +67,6 @@ class CardAddPage extends Component {
     }
   }
 
-  
   render() {
     const { inputs } = this.state;
     const { isLoading } = this.props;

@@ -14,9 +14,9 @@ export default class CreditCardNumberInput extends Component {
     }
   }
 
-  componentWillReceiveProps(nextProps){
-    if(!this.props.cardNumber && nextProps.cardNumber){
-        const num = nextProps.cardNumber.split(" ");
+  componentDidUpdate(prevProps){
+    if(!prevProps.cardNumber && this.props.cardNumber){
+        const num = this.props.cardNumber.split(" ");
         this.setState({
           cardNumber1: num[0],
           cardNumber2: num[1],

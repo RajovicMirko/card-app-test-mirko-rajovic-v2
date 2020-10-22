@@ -10,7 +10,7 @@ export const getCards = () => {
       dispatch({ type: 'GET_CARDS_ERROR' });
     }
   }
-}
+};
 
 export const addCard = (data) => {
   return async (dispatch, getState, { api }) => {
@@ -46,6 +46,24 @@ export const editCard = (data) => {
           dispatch({ type: 'EDIT_CARD_ERROR' });
           reject(false);
         }
+      }
+    });
+  }
+};
+
+export const getCardById = (id) => {
+  return (dispatch, getState, { api }) => {
+    return new Promise(async (resolve, reject) => {
+      dispatch({ type: 'GET_CARD_BY_ID' })
+
+      const payload = await api.cards.getCardById(id);
+
+      if(payload){
+        dispatch({ type: 'GET_CARD_BY_ID_SUCCESS', payload});
+        resolve(payload);
+      } else {
+        dispatch({ type: 'GET_CARD_BY_ID_ERROR' });
+        reject(payload);
       }
     });
   }

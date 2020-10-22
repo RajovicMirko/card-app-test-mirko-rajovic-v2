@@ -69,6 +69,7 @@ const auth = (state = initState, action) => {
     case "EDIT_CARD":
       return {
         ...state,
+        cards: null,
         isLoading: true
       }
     case "EDIT_CARD_ERROR":
@@ -79,9 +80,24 @@ const auth = (state = initState, action) => {
     case "EDIT_CARD_SUCCESS":
       return {
         ...state,
-        cards: null,
         isLoading: false
       }
+
+      case 'GET_CARD_BY_ID':
+        return {
+          ...state,
+          isLoading: true
+        }
+      case 'GET_CARD_BY_ID_SUCCESS':
+        return {
+          ...state,
+          isLoading: false
+        }
+      case 'GET_CARD_BY_ID_ERROR':
+        return {
+          ...state,
+          isLoading: false
+        }
   
     default:
       break;

@@ -2,23 +2,22 @@ const db = require("../");
 const Cards = db.cards;
 
 // Retrieve all Cards from the database.
-exports.findAll = (req, res) => {
-  Cards.find()
-    .then(data => {
-      res.status(200).send(data);
-    })
-    .catch(err => {
-      res.status(500).send({
-        message:
-          err.message || "Some error occurred while retrieving cards."
-      });
+exports.findAll = async (req, res) => {
+  try {
+    const data = await Cards.find();
+    res.status(200).send(data);
+  } catch (error) {
+    res.status(500).send({
+      message: error.message || "Some error occurred while retrieving cards."
     });
+  }
 };
 
 // Create and Save a new Card
 exports.create = async (req, res) => {
   // Validate request
-  if (!req.body.fullName) {
+  const { fullName, cardNumber, expDate } = req.body;
+  if (!fullName || !cardNumber || !expDate) {
     res.status(400).send({ message: "Content can not be empty!" });
     return;
   }
@@ -32,7 +31,7 @@ exports.create = async (req, res) => {
     res.status(201).send(data);
   } catch (error) {
     res.status(500).send({
-      message: err.message || "Some error occurred while creating the Tutorial."
+      message: error.message || "Some error occurred while creating the Tutorial."
     });
   }
 };
@@ -47,74 +46,76 @@ exports.deleteAll = (req, res) => {
     })
     .catch(err => {
       res.status(500).send({
-        message:
-          err.message || "Some error occurred while removing all Cards."
+        message: err.message || "Some error occurred while removing all Cards."
       });
     });
 };
 
 // Find a single Card with an id
-exports.findOne = (req, res) => {
-  const id = req.params.id;
+exports.findOne = async (req, res) => {
+  try {
+    const id = req.params.id;
+    const data = await Cards.findById(id);
 
-  Cards.findById(id)
-    .then(data => {
-      if (!data)
-        res.status(404).send({ message: "Not found Cards with id " + id });
-      else res.status(200).send(data);
-    })
-    .catch(err => {
-      res
-        .status(500)
-        .send({ message: "Error retrieving Cards with id=" + id });
-    });
+    if (!data) {
+      res.status(404).send({ message: "Not found Cards with id " + id });
+    } else {
+      res.status(200).send(data);
+    }
+  } catch (error) {
+    res.status(500).send({
+      message: error.message || "Error retrieving Cards with id=" + id
+    }); 
+  }
 };
 
 // Update a Card by the id in the request
-exports.update = (req, res) => {
-  if (!req.body) {
+exports.update = async (req, res) => {
+  const { fullName, cardNumber, expDate } = req.body;
+
+  if (!fullName || !cardNumber || !expDate) {
     return res.status(400).send({
       message: "Data to update can not be empty!"
     });
   }
 
   const id = req.params.id;
-  Cards.findByIdAndUpdate(id, req.body, { useFindAndModify: false })
-    .then(data => {
-      if (!data) {
-        res.status(404).send({
-          message: `Cannot update Cards with id=${id}. Maybe Card was not found!`
-        });
-      } else {
-        res.status(200).send(data);
-      }
-    })
-    .catch(err => {
-      res.status(500).send({
-        message: `Error updating Card with id=${id}`
+  console.log(req.body);
+
+  try {
+    const data = await Cards.findByIdAndUpdate(id, req.body, { useFindAndModify: false });
+    if (!data) {
+      res.status(404).send({
+        message: `Cannot update Cards with id=${id}. Maybe Card was not found!`
       });
+    } else {
+      res.status(200).send(data);
+    }
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({
+      message: error.message || `Error updating Card with id=${id}`
     });
+  }
 };
 
 // Delete a Card with the specified id in the request
-exports.delete = (req, res) => {
-  const id = req.params.id;
-
-  Cards.findByIdAndRemove(id)
-    .then(data => {
-      if (!data) {
-        res.status(404).send({
-          message: `Cannot delete Card with id=${id}. Maybe Card was not found!`
-        });
-      } else {
-        res.send({
-          message: "Card was deleted successfully!"
-        });
-      }
-    })
-    .catch(err => {
-      res.status(500).send({
-        message: "Could not delete Card with id=" + id
+exports.delete = async (req, res) => {
+  try {
+    const id = req.params.id;
+    const data = await Cards.findByIdAndRemove(id);
+    if (!data) {
+      res.status(404).send({
+        message: `Cannot delete Card with id=${id}. Maybe Card was not found!`
       });
-    });
+    } else {
+      res.send({
+        message: "Card was deleted successfully!"
+      });
+    }
+  } catch (error) {
+    res.status(500).send({
+      message: error.message || "Could not delete Card with id=" + id
+    }); 
+  }
 };

@@ -1,5 +1,6 @@
 import http from '../utils/axios';
 
+// URL /cards
 const getCards = async () => {
   try {
     const url = '/cards';
@@ -24,10 +25,26 @@ const addCard = async (data) => {
 
 const editCard = async (data) => {
   try {
+    const newData = {
+      fullName: data.fullName,
+      cardNumber: data.cardNumber,
+      expDate: data.expDate
+    }
     const url = `/cards/${data.id}`;
-    const payload = await http('put', url, data);
+    const payload = await http('put', url, newData);
     return payload.data;
     
+  } catch (error) {
+    return error;
+  }
+}
+
+// URL /cards/:id
+const getCardById = async (id) => {
+  try {
+    const url = `/cards/${id}`;
+    const payload = await http('get', url);
+    return payload.data;
   } catch (error) {
     return error;
   }
@@ -36,5 +53,6 @@ const editCard = async (data) => {
 export default {
   getCards,
   addCard,
-  editCard
+  editCard,
+  getCardById
 }

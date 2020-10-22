@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-import { withRouter, Redirect } from 'react-router-dom'
+import { withRouter } from 'react-router-dom'
 import {connect} from 'react-redux'
 
 // COMPONENTS
@@ -9,13 +9,13 @@ import FormValidation from '../../components/global/form/validation';
 import { creditCardForm } from '../../components/CreditCard/Form';
 
 // ACTIONS
-import { editCard } from '../../store/actions/cards'
+import { getCardById, editCard } from '../../store/actions/cards';
 
 class CardEditPage extends Component {
   constructor(props){
     super(props);
     this.state = {
-      inputs: { ...props.card },
+      inputs: {},
       rules: {
         fullName: {
           required: { message: 'Full name is required' },
@@ -31,6 +31,22 @@ class CardEditPage extends Component {
       },
       errors: {}
     }
+  }
+
+  async componentDidMount(){
+    const { cardId, getCardById } = this.props;
+    try {
+      const data = await getCardById(cardId);
+  
+      if(data.id) {
+        this.setState({ inputs: {
+          id: data.id,
+          fullName: data.fullName,
+          cardNumber: data.cardNumber,
+          expDate: data.expDate
+        } });
+      }
+    } catch (error) {}
   }
 
   validate = (key) => {
@@ -53,7 +69,6 @@ class CardEditPage extends Component {
   handleSubmit = async (event) => {
     event.preventDefault();
     const inputs = this.state.inputs;
-    
     if(this.validate()){
       const { history, editCard } = this.props;
       const done = await editCard({ ...inputs });
@@ -67,9 +82,7 @@ class CardEditPage extends Component {
 
   render() {
     const { inputs } = this.state;
-    const { isLoading, card } = this.props;
-
-    if(!card) return <Redirect to="/" />
+    const { isLoading } = this.props;
 
     return (
       <div className="container">
@@ -98,13 +111,8 @@ class CardEditPage extends Component {
 }
 
 const mapStateToProps = (state, ownProps) => {
-  const cardId = ownProps.match.params.id;
-  const cards = state.cards.cards;
-  const card = cards && cards.find(card => card.id === cardId)
-  
   return {
-    cards,
-    card,
+    cardId: ownProps.match.params.id,
     cardNumberFirstDigitArray: Object.keys(state.cards.logos),
     isLoading: state.cards.isLoading
   }
@@ -112,6 +120,7 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
+    getCardById: (id) => dispatch(getCardById(id)),
     editCard: (data) => dispatch(editCard(data))
   }
 }

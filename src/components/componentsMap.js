@@ -10,6 +10,7 @@ import input from './global/input'
 import button from './global/button'
 import loadingFullPage from './global/loading/full-page'
 import loadingSmall from './global/loading/small'
+import notification from './global/notification'
 
 
 const components = {
@@ -21,6 +22,7 @@ const components = {
   button,
   'loading-full-page': loadingFullPage,
   'loading-small': loadingSmall,
+  notification
 };
 
 export const getComponent = (data) => {

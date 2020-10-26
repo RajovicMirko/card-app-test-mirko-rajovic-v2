@@ -84,6 +84,10 @@ class CardEditPage extends Component {
     if(done) this.resetComponentAndPush('/cards');
   }
 
+  testFunc = () => {
+    console.log('test funkcija iz komponente');
+  }
+
   render() {
     const { inputs } = this.state;
     const { isLoading } = this.props;

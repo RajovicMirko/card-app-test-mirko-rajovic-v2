@@ -14,7 +14,7 @@ class CardsPage extends Component {
   }
 
   render() {
-    const { history, cards, isLoading } = this.props;
+    const { history, cards, isLoading, notification } = this.props;
     
     return (
       <div className="container">
@@ -44,6 +44,7 @@ class CardsPage extends Component {
             })}
 
             { getComponent({ component: 'loading-full-page', isLoading, colors: ['red', 'green', 'blue'] }) }
+            { notification && getComponent({ component: 'notification', ...notification }) }
           </div>
         </div>
       </div>
@@ -54,6 +55,7 @@ class CardsPage extends Component {
 const mapStateToProps = (state) => {
   return {
     cards: state.cards.cards,
+    notification: state.cards.notification,
     isLoading: state.cards.isLoading
   }
 } 

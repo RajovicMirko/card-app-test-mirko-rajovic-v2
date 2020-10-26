@@ -1,0 +1,178 @@
+$margin: 10px;
+$center-top: calc(50% - 20px);
+$notification-time: 4s;
+
+.notification-wrapper {
+  position: fixed;
+
+  // POSITION
+  &.top {
+    top: $margin;
+    animation: notificationTop $notification-time linear forwards;
+
+    &-left {
+      @extend .top;
+      left: $margin;
+    }
+
+    &-right {
+      @extend .top;
+      right: $margin;
+    }
+  }
+
+  &.center {
+    top: $center-top;
+    animation: notificationCenter $notification-time linear forwards;
+
+    &-left {
+      @extend .center;
+      left: $margin;
+    }
+
+    &-right {
+      @extend .center;
+      right: $margin;
+    }
+  }
+
+  &.bottom {
+    bottom: $margin;
+    animation: notificationBottom $notification-time linear forwards;
+
+    &-left {
+      @extend .bottom;
+      left: $margin;
+    }
+
+    &-right {
+      @extend .bottom;
+      right: $margin;
+    }
+  }
+
+  & .card {
+    min-width: 300px;
+    max-width: 70%;
+    border: none;
+    box-shadow: 3px 3px 7px 1px rgba(0, 0, 0, 0.2);
+
+    & .title {
+      font-size: 1rem;
+      margin: 0;
+      padding: 0.2rem 0.5rem;
+    }
+
+    & hr {
+      margin: 0;
+    }
+
+    & .card-body {
+      padding: 0.5rem 1rem;
+      text-align: justify;
+      font-size: 0.8rem;
+    }
+
+    // COLOR SCHEMA
+    &.primary {
+      background-color: $primary;
+      color: white;
+
+      & hr {
+        border-color: white;
+      }
+    }
+
+    &.danger {
+      background-color: $danger;
+      color: white;
+
+      & hr {
+        border-color: white;
+      }
+    }
+
+    &.success {
+      background-color: $success;
+      color: white;
+
+      & hr {
+        border-color: white;
+      }
+    }
+  }
+}
+
+@keyframes notificationTop {
+  0% {
+    display: inline-block;
+    top: $center-top;
+    opacity: 0.1;
+  }
+  20% {
+    top: $margin;
+    opacity: 1;
+  }
+  50% {
+    top: $margin;
+    opacity: 1;
+  }
+  80% {
+    top: $margin;
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    top: -200px;
+    display: none;
+  }
+}
+
+@keyframes notificationCenter {
+  0% {
+    top: $margin;
+    opacity: 0.1;
+  }
+  20% {
+    top: $center-top;
+    opacity: 1;
+  }
+  50% {
+    top: $center-top;
+    opacity: 1;
+  }
+  80% {
+    top: $center-top;
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    top: -200px;
+    display: none;
+  }
+}
+
+@keyframes notificationBottom {
+  0% {
+    display: inline-block;
+    bottom: $center-top;
+    opacity: 0.1;
+  }
+  20% {
+    bottom: $margin;
+    opacity: 1;
+  }
+  50% {
+    bottom: $margin;
+    opacity: 1;
+  }
+  80% {
+    bottom: $margin;
+    opacity: 1;
+  }
+  100% {
+    opacity: 1;
+    bottom: -200px;
+    display: none;
+  }
+}

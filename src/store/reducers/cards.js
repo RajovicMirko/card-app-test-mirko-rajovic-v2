@@ -18,7 +18,8 @@ const initState = {
       logo: discoverLogo
     }
   },
-  isLoading: false
+  isLoading: false,
+  notification: null,
 };
 
 const auth = (state = initState, action) => {
@@ -48,11 +49,17 @@ const auth = (state = initState, action) => {
     case "ADD_CARD":
       return {
         ...state,
+        notification: null,
         isLoading: true
       }
     case "ADD_CARD_ERROR":
       return {
         ...state,
+        notification: {
+          color: 'danger',
+          title: 'Add card',
+          message: 'Error on add card operation'
+        },
         isLoading: false
       }
     case "ADD_CARD_SUCCESS":
@@ -62,6 +69,11 @@ const auth = (state = initState, action) => {
       return { 
         ...state,
         cards,
+        notification: {
+          color: 'success',
+          title: 'Add card',
+          message: 'Card successfully added'
+        },
         isLoading: false
       }
 
@@ -80,6 +92,11 @@ const auth = (state = initState, action) => {
     case "EDIT_CARD_SUCCESS":
       return {
         ...state,
+        notification: {
+          color: 'success',
+          title: 'Edit card',
+          message: 'Card successfully edited'
+        },
         isLoading: false
       }
 
@@ -98,6 +115,11 @@ const auth = (state = initState, action) => {
       case "DELETE_CARD_SUCCESS":
         return {
           ...state,
+          notification: {
+            color: 'success',
+            title: 'Delete card',
+            message: 'Card successfully deleted'
+          },
           isLoading: false
         }
       
@@ -105,6 +127,7 @@ const auth = (state = initState, action) => {
       case 'GET_CARD_BY_ID':
         return {
           ...state,
+          notification: null,
           isLoading: true
         }
       case 'GET_CARD_BY_ID_SUCCESS':

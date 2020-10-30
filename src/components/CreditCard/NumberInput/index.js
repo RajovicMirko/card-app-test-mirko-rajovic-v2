@@ -67,21 +67,19 @@ export default class CreditCardNumberInput extends Component {
           id="cardNumber"
           className={`input-card-number ${error && "is-invalid"}`}
         >
-          {Object.keys(this.state).map((key, i) => {
-            return (
-              <Input
-                key={key}
-                forwardRef={(ref) => (this.inputRefs[i] = ref)}
-                id={`cardNumber${i}`}
-                type="text"
-                addClass="m-0"
-                value={this.state[key]}
-                maxlength={4}
-                hasError={error}
-                onChange={this.handleChange}
-              />
-            );
-          })}
+          {Object.keys(this.state).map((key, i) => (
+            <Input
+              key={key}
+              forwardRef={(ref) => (this.inputRefs[i] = ref)}
+              id={`cardNumber${i}`}
+              type="text"
+              addClass="m-0"
+              value={this.state[key]}
+              maxlength={4}
+              hasError={error}
+              onChange={this.handleChange}
+            />
+          ))}
         </div>
         <small className="text-danger mb-3">{error}</small>
       </React.Fragment>

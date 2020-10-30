@@ -1,40 +1,46 @@
-import React from 'react'
+import React from "react";
 
 export default function Input(props) {
   const {
     id,
     type,
-    addClass = '',
-    addClassLabel = '',
-    addClassInput = '',
+    addClass = "",
+    addClassLabel = "",
+    addClassInput = "",
     label = null,
     placeholder = null,
-    value = '',
+    value = "",
     maxlength,
     error = null,
     hasError = null,
-    onChange
+    onChange,
+    forwardRef = null,
   } = props;
 
   return (
     <div className={`form-group ${addClass}`}>
-      { label &&
+      {label && (
         <div className="d-flex justify-content-between align-items-end">
-          <label htmlFor={id} className={addClassLabel}>{label}</label>
+          <label htmlFor={id} className={addClassLabel}>
+            {label}
+          </label>
         </div>
-      }
+      )}
       <input
+        ref={forwardRef}
         key={id}
         id={id}
         type={type}
-        className={`form-control form-control-sm ${(error || hasError) && 'is-invalid'} ${addClassInput} ${!!error && ''}`}
+        className={`form-control form-control-sm ${
+          (error || hasError) && "is-invalid"
+        } ${addClassInput} ${!!error && ""}`}
         placeholder={placeholder}
         value={value}
         maxLength={maxlength}
         onChange={onChange}
         onFocus={(e) => e.target.select()}
       />
-      {error && <small className="text-danger">{ error }</small> }
+      {error && <small className="text-danger">{error}</small>}
     </div>
-  )
+  );
 }

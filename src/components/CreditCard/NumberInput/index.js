@@ -7,55 +7,53 @@ export default class CreditCardNumberInput extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      cardNumber0: "",
-      cardNumber1: "",
-      cardNumber2: "",
-      cardNumber3: "",
+      cardNumber: [],
     };
+    this.singleInputLengthLimit = 4;
     this.inputRefs = [];
   }
 
   componentDidUpdate(prevProps) {
     if (!prevProps.cardNumber && this.props.cardNumber) {
-      const [
-        cardNumber0,
-        cardNumber1,
-        cardNumber2,
-        cardNumber3,
-      ] = this.props.cardNumber.split(" ");
-
-      this.setState({
-        cardNumber0,
-        cardNumber1,
-        cardNumber2,
-        cardNumber3,
-      });
+      const cardNumber = this.props.cardNumber.split(" ");
+      this.setState({ cardNumber });
     }
   }
 
-  handleChange = (event) => {
-    const state = this.state;
-    state[event.target.id] = event.target.value;
-
-    this.setState({ ...state });
-
-    if (event.target.value.length === 4 && event.target.id !== "cardNumber3") {
-      const fieldNum = Number(event.target.id.slice(-1)) + 1;
-      this.inputRefs[fieldNum].focus();
+  focusNextInput = (curentInputLength, nextFieldId) => {
+    if (
+      curentInputLength === this.singleInputLengthLimit &&
+      nextFieldId < this.state.cardNumber.length
+    ) {
+      this.inputRefs[nextFieldId].focus();
     }
+  };
 
-    const newCardNumber = Object.values(this.state).join(" ");
-    const localEvent = {
+  prepareReturnStatement = () => {
+    return {
       target: {
         id: "cardNumber",
-        value: newCardNumber.trim(),
+        value: this.state.cardNumber.join(" "),
       },
     };
+  };
 
-    this.props.onChange(localEvent);
+  handleChange = (event) => {
+    const state = this.state;
+    const id = Number(event.target.id);
+    const value = event.target.value;
+
+    state.cardNumber[id] = value;
+    this.setState({ ...state });
+
+    const nextFieldId = id + 1;
+    this.focusNextInput(value.length, nextFieldId);
+
+    this.props.onChange(this.prepareReturnStatement());
   };
 
   render() {
+    const { cardNumber } = this.state;
     const { addClassLabel, error } = this.props;
 
     return (
@@ -67,14 +65,14 @@ export default class CreditCardNumberInput extends Component {
           id="cardNumber"
           className={`input-card-number ${error && "is-invalid"}`}
         >
-          {Object.keys(this.state).map((key, i) => (
+          {cardNumber.map((val, i) => (
             <Input
-              key={key}
+              key={i}
               forwardRef={(ref) => (this.inputRefs[i] = ref)}
-              id={`cardNumber${i}`}
+              id={i}
               type="text"
               addClass="m-0"
-              value={this.state[key]}
+              value={val}
               maxlength={4}
               hasError={error}
               onChange={this.handleChange}

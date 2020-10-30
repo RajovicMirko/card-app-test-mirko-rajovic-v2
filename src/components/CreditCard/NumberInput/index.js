@@ -4,12 +4,17 @@ import React, { Component } from "react";
 import Input from "../../global/input";
 
 export default class CreditCardNumberInput extends Component {
+  #numberPartsCount = 4;
+  #singleInputLengthLimit = 4;
+
   constructor(props) {
     super(props);
     this.state = {
-      cardNumber: Array.from({ length: 4 }, (val, i) => ""),
+      cardNumber: Array.from(
+        { length: this.#numberPartsCount },
+        (val, i) => ""
+      ),
     };
-    this.singleInputLengthLimit = 4;
     this.inputRefs = [];
   }
 
@@ -22,7 +27,7 @@ export default class CreditCardNumberInput extends Component {
 
   focusNextInput = (curentInputLength, nextFieldId) => {
     if (
-      curentInputLength === this.singleInputLengthLimit &&
+      curentInputLength === this.#singleInputLengthLimit &&
       nextFieldId < this.state.cardNumber.length
     ) {
       this.inputRefs[nextFieldId].focus();
@@ -73,7 +78,7 @@ export default class CreditCardNumberInput extends Component {
               type="text"
               addClass="m-0"
               value={val}
-              maxlength={this.singleInputLengthLimit}
+              maxlength={this.#singleInputLengthLimit}
               hasError={error}
               onChange={this.handleChange}
             />

@@ -1,8 +1,8 @@
 function freezeCompleteObject(object) {
   // WORKS WITH OBJECTS AND ARRAY
-  Object.keys(object).map((key) => {
+  for (let key in object) {
     if (typeof object[key] === "object") freezeCompleteObject(object[key]);
-  });
+  }
 
   return Object.freeze(object);
 }

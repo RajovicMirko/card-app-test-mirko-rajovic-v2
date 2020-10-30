@@ -1,22 +1,22 @@
-import visaLogo from '../../assets/files_1050346_1023544_visa_01-0a31cd6ab1ed6e52a0f65646ae4b0070-eeb4f4.png'
-import discoverLogo from '../../assets/files_1050346_1023544_discovercard-166021f728ac0d4cc1bdf8a5d7def67e-3ea92c.png'
-import masterLogo from '../../assets/files_1050346_1023544_mastercard-eb9215199829ef5e3ad671b7b3289480-ce80c8.png'
+import visaLogo from "../../assets/files_1050346_1023544_visa_01-0a31cd6ab1ed6e52a0f65646ae4b0070-eeb4f4.png";
+import discoverLogo from "../../assets/files_1050346_1023544_discovercard-166021f728ac0d4cc1bdf8a5d7def67e-3ea92c.png";
+import masterLogo from "../../assets/files_1050346_1023544_mastercard-eb9215199829ef5e3ad671b7b3289480-ce80c8.png";
 
 const initState = {
   cards: null,
   logos: {
-    "4": {
-      name: 'visa', // ADDED BECOUSE OF CREDIT CARD LOGO CSS STYLEING
-      logo: visaLogo
+    4: {
+      name: "visa", // ADDED BECAUSE OF CREDIT CARD LOGO CSS STYLEING
+      logo: visaLogo,
     },
-    "5": {
-      name: 'master', // ADDED BECOUSE OF CREDIT CARD LOGO CSS STYLEING
-      logo: masterLogo
+    5: {
+      name: "master", // ADDED BECAUSE OF CREDIT CARD LOGO CSS STYLEING
+      logo: masterLogo,
     },
-    "6": {
-      name: 'discover', // ADDED BECOUSE OF CREDIT CARD LOGO CSS STYLEING
-      logo: discoverLogo
-    }
+    6: {
+      name: "discover", // ADDED BECAUSE OF CREDIT CARD LOGO CSS STYLEING
+      logo: discoverLogo,
+    },
   },
   isLoading: false,
   notification: null,
@@ -31,116 +31,116 @@ const auth = (state = initState, action) => {
     case "GET_CARDS":
       return {
         ...state,
-        isLoading: true
-      }
+        isLoading: true,
+      };
     case "GET_CARDS_ERROR":
       return {
         ...state,
-        isLoading: false
-      }
+        isLoading: false,
+      };
     case "GET_CARDS_SUCCESS":
       return {
         ...state,
         cards: payload.length ? payload : null,
-        isLoading: false
-      }
+        isLoading: false,
+      };
 
     // ADD CARD REDUCER
     case "ADD_CARD":
       return {
         ...state,
         notification: null,
-        isLoading: true
-      }
+        isLoading: true,
+      };
     case "ADD_CARD_ERROR":
       return {
         ...state,
         notification: {
-          color: 'danger',
-          title: 'Add card',
-          message: 'Error on add card operation'
+          color: "danger",
+          title: "Add card",
+          message: "Error on add card operation",
         },
-        isLoading: false
-      }
+        isLoading: false,
+      };
     case "ADD_CARD_SUCCESS":
       cards = state.cards || [];
       cards.push(payload);
 
-      return { 
+      return {
         ...state,
         cards,
         notification: {
-          color: 'success',
-          title: 'Add card',
-          message: 'Card successfully added'
+          color: "success",
+          title: "Add card",
+          message: "Card successfully added",
         },
-        isLoading: false
-      }
+        isLoading: false,
+      };
 
     // EDIT CARD REDUCER
     case "EDIT_CARD":
       return {
         ...state,
         cards: null,
-        isLoading: true
-      }
+        isLoading: true,
+      };
     case "EDIT_CARD_ERROR":
       return {
         ...state,
-        isLoading: false
-      }
+        isLoading: false,
+      };
     case "EDIT_CARD_SUCCESS":
       return {
         ...state,
         notification: {
-          color: 'success',
-          title: 'Edit card',
-          message: 'Card successfully edited'
+          color: "success",
+          title: "Edit card",
+          message: "Card successfully edited",
         },
-        isLoading: false
-      }
+        isLoading: false,
+      };
 
-      // DELETE CARD REDUCER
-      case "DELETE_CARD":
-        return {
-          ...state,
-          cards: null,
-          isLoading: true
-        }
-      case "DELETE_CARD_ERROR":
-        return {
-          ...state,
-          isLoading: false
-        }
-      case "DELETE_CARD_SUCCESS":
-        return {
-          ...state,
-          notification: {
-            color: 'success',
-            title: 'Delete card',
-            message: 'Card successfully deleted'
-          },
-          isLoading: false
-        }
-      
-      // GET CARD BY ID REDUCER
-      case 'GET_CARD_BY_ID':
-        return {
-          ...state,
-          notification: null,
-          isLoading: true
-        }
-      case 'GET_CARD_BY_ID_SUCCESS':
-        return {
-          ...state,
-          isLoading: false
-        }
-      case 'GET_CARD_BY_ID_ERROR':
-        return {
-          ...state,
-          isLoading: false
-        }
-  
+    // DELETE CARD REDUCER
+    case "DELETE_CARD":
+      return {
+        ...state,
+        cards: null,
+        isLoading: true,
+      };
+    case "DELETE_CARD_ERROR":
+      return {
+        ...state,
+        isLoading: false,
+      };
+    case "DELETE_CARD_SUCCESS":
+      return {
+        ...state,
+        notification: {
+          color: "success",
+          title: "Delete card",
+          message: "Card successfully deleted",
+        },
+        isLoading: false,
+      };
+
+    // GET CARD BY ID REDUCER
+    case "GET_CARD_BY_ID":
+      return {
+        ...state,
+        notification: null,
+        isLoading: true,
+      };
+    case "GET_CARD_BY_ID_SUCCESS":
+      return {
+        ...state,
+        isLoading: false,
+      };
+    case "GET_CARD_BY_ID_ERROR":
+      return {
+        ...state,
+        isLoading: false,
+      };
+
     default:
       break;
   }

@@ -73,7 +73,7 @@ export default class CreditCardNumberInput extends Component {
               type="text"
               addClass="m-0"
               value={val}
-              maxlength={4}
+              maxlength={this.singleInputLengthLimit}
               hasError={error}
               onChange={this.handleChange}
             />

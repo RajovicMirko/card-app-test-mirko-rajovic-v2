@@ -27,9 +27,8 @@ class CardAddPage extends Component {
         cardNumber: {
           cardNumberFirstDigit: {
             value: props.cardNumberFirstDigitArray,
-            message: `First digit must be ${props.cardNumberFirstDigitArray.join(
-              ", "
-            )}`,
+            message: `First digit must be
+              ${props.cardNumberFirstDigitArray.join(", ")}`,
           },
           cardNumber: { message: "Wrong card number" },
         },

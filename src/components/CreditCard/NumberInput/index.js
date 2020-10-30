@@ -7,7 +7,7 @@ export default class CreditCardNumberInput extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      cardNumber: [],
+      cardNumber: Array.from({ length: 4 }, (val, i) => ""),
     };
     this.singleInputLengthLimit = 4;
     this.inputRefs = [];

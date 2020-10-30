@@ -1,48 +1,53 @@
-import React, { Component } from 'react';
-import { withRouter } from 'react-router-dom';
-import {connect} from 'react-redux';
+import React, { Component } from "react";
+import { withRouter } from "react-router-dom";
+import { connect } from "react-redux";
 
 // COMPONENTS
-import { getComponent } from '../../components/componentsMap';
-import FormValidation from '../../components/global/form/validation';
-import { creditCardForm } from '../../components/CreditCard/Form/add';
+import { getComponent } from "../../components/componentsMap";
+import FormValidation from "../../components/global/form/validation";
+import { creditCardForm } from "../../components/CreditCard/Form/add";
 
 // ACTIONS
-import { addCard } from '../../store/actions/cards'
+import { addCard } from "../../store/actions/cards";
 
 class CardAddPage extends Component {
-  constructor(props){
+  constructor(props) {
     super(props);
     this.state = {
       inputs: {
-        fullName: '',
-        cardNumber: '',
-        expDate: '',
+        fullName: "",
+        cardNumber: "",
+        expDate: "",
       },
       rules: {
         fullName: {
-          required: { message: 'Full name is required' },
-          min: { value: 6, message: 'Must be at least 6 characters long'}
+          required: { message: "Full name is required" },
+          min: { value: 6, message: "Must be at least 6 characters long" },
         },
         cardNumber: {
-          cardNumberFirstDigit: { value: props.cardNumberFirstDigitArray, message: `First digit must be ${props.cardNumberFirstDigitArray.join(", ")}`},
-          cardNumber: { message: 'Wrong card number'}
+          cardNumberFirstDigit: {
+            value: props.cardNumberFirstDigitArray,
+            message: `First digit must be ${props.cardNumberFirstDigitArray.join(
+              ", "
+            )}`,
+          },
+          cardNumber: { message: "Wrong card number" },
         },
         expDate: {
-          exparationDate: { message: 'Wrong date' }
+          exparationDate: { message: "Wrong date" },
         },
       },
-      errors: {}
-    }
+      errors: {},
+    };
   }
 
   validate = (key) => {
-    const form = new FormValidation(this.state)
+    const form = new FormValidation(this.state);
     const { isValid, errors } = key ? form.validate(key) : form.validate();
     this.setState({ errors: errors });
 
     return isValid;
-  }
+  };
 
   handleChange = (event) => {
     let inputs = this.state.inputs;
@@ -51,21 +56,21 @@ class CardAddPage extends Component {
     inputs[targetId] = event.target.value;
     this.setState({ inputs });
     this.validate(targetId);
-  }
+  };
 
   handleSubmit = async (event) => {
     event.preventDefault();
     const inputs = this.state.inputs;
 
-    if(this.validate()){
+    if (this.validate()) {
       const { history, addCard } = this.props;
       const done = await addCard({ ...inputs });
-      if(done) {
+      if (done) {
         this.setState({ inputs: {} });
-        history.push('/cards');
+        history.push("/cards");
       }
     }
-  }
+  };
 
   render() {
     const { inputs } = this.state;
@@ -74,40 +79,45 @@ class CardAddPage extends Component {
     return (
       <div className="container">
         <div className="my-cards page page-center py-5">
-        <div className="col-10 col-md-6 col-xl-5 d-flex flex-column align-items-center">
-          <h2 className="text-muted mb-5">Add card to account</h2>
+          <div className="col-10 col-md-6 col-xl-5 d-flex flex-column align-items-center">
+            <h2 className="text-muted mb-5">Add card to account</h2>
 
-          { getComponent({ component: 'credit-card', ...inputs })}
+            {getComponent({ component: "credit-card", ...inputs })}
 
-          {
-            getComponent({
+            {getComponent({
               component: "form",
               addClass: "w-100",
               onSubmit: this.handleSubmit,
               addClassTitle: "text-center text-primary",
-              children: creditCardForm(this.state, this.handleChange)
-            })
-          }
+              children: creditCardForm(this.state, this.handleChange),
+            })}
 
-          { getComponent({ component: 'loading-full-page', isLoading, colors: ['red', 'green', 'blue'] }) }
+            {getComponent({
+              component: "loading-full-page",
+              isLoading,
+              colors: ["red", "green", "blue"],
+            })}
+          </div>
         </div>
-      </div> 
       </div>
-    )
+    );
   }
 }
 
 const mapStateToProps = (state) => {
   return {
     cardNumberFirstDigitArray: Object.keys(state.cards.logos),
-    isLoading: state.cards.isLoading
-  }
-} 
+    isLoading: state.cards.isLoading,
+  };
+};
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    addCard: (data) => dispatch(addCard(data))
-  }
-}
+    addCard: (data) => dispatch(addCard(data)),
+  };
+};
 
-export default connect(mapStateToProps, mapDispatchToProps)(withRouter(CardAddPage))
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withRouter(CardAddPage));

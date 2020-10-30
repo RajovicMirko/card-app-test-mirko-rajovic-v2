@@ -1,13 +1,54 @@
+function freezeCompleteObject(object) {
+  // WORKS WITH OBJECTS AND ARRAY
+  Object.keys(object).map((key) => {
+    if (typeof object[key] === "object") freezeCompleteObject(object[key]);
+  });
+
+  return Object.freeze(object);
+}
+
 export default class FormValidation {
-  constructor(state) {
-    this.inputs = state.inputs;
-    this.errors = {};
-    this.rules = state.rules;
-    this.isValid = true;
+  #inputs;
+  #rules;
+  #errors = {};
+  #isValid = true;
+
+  constructor(props) {
+    this.#inputs = Object.assign({}, props.inputs);
+    this.#rules = Object.assign({}, props.rules);
+
+    freezeCompleteObject(this.#inputs);
+    freezeCompleteObject(this.#rules);
+  }
+
+  set isValid(value) {
+    this.#isValid = value;
+  }
+  get isValid() {
+    return this.#isValid;
+  }
+
+  get inputs() {
+    return this.#inputs;
+  }
+
+  get rules() {
+    return this.#rules;
+  }
+
+  set errors(value) {
+    this.#errors = value;
+  }
+  get errors() {
+    return this.#errors;
+  }
+
+  get validate() {
+    return this.#validate;
   }
 
   // VALIDATION RULES
-  _validationRules = {
+  #validationRules = {
     required: (val) => !!val,
     min: (val, length) => val && val.length >= length,
     cardNumberFirstDigit: (val, numbersArray) => {
@@ -35,10 +76,10 @@ export default class FormValidation {
   };
 
   // LOOP VALIDATION RULES
-  _checkRules = (key, fieldValue, rules) => {
+  #checkRules = (key, fieldValue, rules) => {
     for (let validateFunctionName in rules) {
       const { message, value } = rules[validateFunctionName];
-      const validationFunction = this._validationRules[validateFunctionName];
+      const validationFunction = this.#validationRules[validateFunctionName];
 
       if (!validationFunction(fieldValue, value)) {
         // FIND FIRST ERROR AND EXIT
@@ -51,10 +92,10 @@ export default class FormValidation {
   };
 
   // VALIDATION FOR SPECIFIC FIELD
-  _validateInput = (key) => {
+  #validateInput = (key) => {
     const fieldValue = this.inputs[key];
     const rules = this.rules[key];
-    this._checkRules(key, fieldValue, rules);
+    this.#checkRules(key, fieldValue, rules);
 
     return {
       isValid: this.isValid,
@@ -63,10 +104,10 @@ export default class FormValidation {
   };
 
   // VALIDATION FOR COMPLETE FORM
-  _validateForm = () => {
+  #validateForm = () => {
     // LOOP FIELDS
     for (let key in this.rules) {
-      this._validateInput(key);
+      this.#validateInput(key);
       if (!this.isValid) break;
     }
 
@@ -76,11 +117,11 @@ export default class FormValidation {
     };
   };
 
-  validate = (fieldKey) => {
+  #validate = (fieldKey) => {
     if (fieldKey) {
-      return this._validateInput(fieldKey);
+      return this.#validateInput(fieldKey);
     } else {
-      return this._validateForm();
+      return this.#validateForm();
     }
   };
 }

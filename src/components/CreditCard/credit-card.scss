@@ -12,6 +12,7 @@
     rgba(213, 219, 230, 1) 100%
   );
   box-shadow: 3px 3px 8px 0px rgba(65, 47, 47, 0.5);
+  color: rgb(41, 41, 41);
 
   &-add {
     @extend .credit-card;
@@ -49,13 +50,9 @@
     left: 30px;
     padding: 2px;
     border-radius: 10px;
-    background: linear-gradient(
-      135deg,
-      rgba(79, 86, 104, 0.1) 0%,
-      rgba(79, 86, 104, 0.5) 10%,
-      rgba(177, 193, 233, 0.5) 90%,
-      rgba(177, 193, 233, 0.1) 100%
-    );
+    box-shadow: inset 0px -2px rgba(255, 255, 255, 0.2),
+      inset -2px 0px rgba(255, 255, 255, 0.1), inset 2px 0px rgba(0, 0, 0, 0.1),
+      inset 0px 2px rgba(0, 0, 0, 0.2);
 
     & img {
       width: 50px;
@@ -68,6 +65,7 @@
     text-align: center;
     width: 100%;
     & h2 {
+      text-shadow: 0px 1px rgba(255, 255, 255, 0.5), 0px -1px rgba(0, 0, 0, 1);
       font-size: 2.2rem;
     }
   }
@@ -83,6 +81,13 @@
       width: 100%;
       display: flex;
       justify-content: space-between;
+
+      & .card-username {
+        text-shadow: 0px 1px rgba(255, 255, 255, 0.3), 0px -1px rgba(0, 0, 0, 1);
+      }
+      & .card-exp {
+        text-shadow: 0px 1px rgba(255, 255, 255, 0.5), 0px -1px rgba(0, 0, 0, 1);
+      }
     }
   }
 

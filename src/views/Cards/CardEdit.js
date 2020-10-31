@@ -105,7 +105,7 @@ class CardEditPage extends Component {
               addClass: "w-100",
               onSubmit: this.handleSubmit,
               addClassTitle: "text-center text-primary",
-              children: creditCardForm(
+              formChildren: creditCardForm(
                 this.state,
                 this.handleChange,
                 this.handleDelete

@@ -88,7 +88,7 @@ class CardAddPage extends Component {
               addClass: "w-100",
               onSubmit: this.handleSubmit,
               addClassTitle: "text-center text-primary",
-              children: creditCardForm(this.state, this.handleChange),
+              formChildren: creditCardForm(this.state, this.handleChange),
             })}
 
             {getComponent({

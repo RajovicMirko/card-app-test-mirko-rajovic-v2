@@ -40,12 +40,9 @@ class CardAddPage extends Component {
     };
   }
 
-  validate = (key) => {
-    const form = new FormValidation(this.state);
-    const { isValid, errors } = key ? form.validate(key) : form.validate();
-    this.setState({ errors: errors });
-
-    return isValid;
+  resetComponentAndPush = () => {
+    this.setState({ inputs: {} });
+    this.props.history.push("/cards");
   };
 
   handleChange = (event) => {
@@ -57,17 +54,20 @@ class CardAddPage extends Component {
     this.validate(targetId);
   };
 
-  handleSubmit = async (event) => {
+  validate = (key) => {
+    const form = new FormValidation(this.state);
+    const { isValid, errors } = key ? form.validate(key) : form.validate();
+    this.setState({ errors: errors });
+
+    return isValid;
+  };
+
+  handleSubmit = (event) => {
     event.preventDefault();
-    const inputs = this.state.inputs;
+    const state = this.state;
 
     if (this.validate()) {
-      const { history, addCard } = this.props;
-      const done = await addCard({ ...inputs });
-      if (done) {
-        this.setState({ inputs: {} });
-        history.push("/cards");
-      }
+      this.props.addCard({ ...state.inputs }, this.resetComponentAndPush());
     }
   };
 
@@ -112,7 +112,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    addCard: (data) => dispatch(addCard(data)),
+    addCard: (data, fn) => dispatch(addCard(data, fn)),
   };
 };
 

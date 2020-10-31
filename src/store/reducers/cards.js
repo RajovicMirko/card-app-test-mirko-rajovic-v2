@@ -24,13 +24,13 @@ const initState = {
 
 const auth = (state = initState, action) => {
   const { type, payload } = action;
-  let cards = null;
 
   switch (type) {
     // GET CARDS REDUCER
     case "GET_CARDS":
       return {
         ...state,
+        cards: null,
         isLoading: true,
       };
     case "GET_CARDS_ERROR":
@@ -63,12 +63,8 @@ const auth = (state = initState, action) => {
         isLoading: false,
       };
     case "ADD_CARD_SUCCESS":
-      cards = state.cards || [];
-      cards.push(payload);
-
       return {
         ...state,
-        cards,
         notification: {
           color: "success",
           title: "Add card",
@@ -81,7 +77,7 @@ const auth = (state = initState, action) => {
     case "EDIT_CARD":
       return {
         ...state,
-        cards: null,
+        notification: null,
         isLoading: true,
       };
     case "EDIT_CARD_ERROR":
@@ -96,29 +92,6 @@ const auth = (state = initState, action) => {
           color: "success",
           title: "Edit card",
           message: "Card successfully edited",
-        },
-        isLoading: false,
-      };
-
-    // DELETE CARD REDUCER
-    case "DELETE_CARD":
-      return {
-        ...state,
-        cards: null,
-        isLoading: true,
-      };
-    case "DELETE_CARD_ERROR":
-      return {
-        ...state,
-        isLoading: false,
-      };
-    case "DELETE_CARD_SUCCESS":
-      return {
-        ...state,
-        notification: {
-          color: "success",
-          title: "Delete card",
-          message: "Card successfully deleted",
         },
         isLoading: false,
       };
@@ -141,10 +114,32 @@ const auth = (state = initState, action) => {
         isLoading: false,
       };
 
+    // DELETE CARD REDUCER
+    case "DELETE_CARD":
+      return {
+        ...state,
+        notification: null,
+        isLoading: true,
+      };
+    case "DELETE_CARD_ERROR":
+      return {
+        ...state,
+        isLoading: false,
+      };
+    case "DELETE_CARD_SUCCESS":
+      return {
+        ...state,
+        notification: {
+          color: "success",
+          title: "Delete card",
+          message: "Card successfully deleted",
+        },
+        isLoading: false,
+      };
+
     default:
-      break;
+      return state;
   }
-  return state;
 };
 
 export default auth;

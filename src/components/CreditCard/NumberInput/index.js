@@ -59,7 +59,7 @@ export default class CreditCardNumberInput extends Component {
 
   render() {
     const { cardNumber } = this.state;
-    const { addClassLabel, error } = this.props;
+    const { addClassLabel, error, forwardRef } = this.props;
 
     return (
       <React.Fragment>
@@ -69,6 +69,7 @@ export default class CreditCardNumberInput extends Component {
         <div
           id="cardNumber"
           className={`input-card-number ${error && "is-invalid"}`}
+          ref={forwardRef}
         >
           {cardNumber.map((val, i) => (
             <Input

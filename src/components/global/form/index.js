@@ -11,11 +11,10 @@ function Form(props) {
     addClassTitle,
     formChildren = null,
   } = props;
-  let fieldsRefs = [];
+  const fieldsRefs = [];
 
   useEffect(() => {
     fieldsRefs[0].focus();
-    return () => (fieldsRefs = []);
   }, []);
 
   return (

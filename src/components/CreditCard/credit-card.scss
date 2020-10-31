@@ -44,10 +44,20 @@
   }
 
   & .card-chip {
+    position: absolute;
+    top: 55px;
+    left: 30px;
+    padding: 2px;
+    border-radius: 10px;
+    background: linear-gradient(
+      135deg,
+      rgba(79, 86, 104, 0.1) 0%,
+      rgba(79, 86, 104, 0.5) 10%,
+      rgba(177, 193, 233, 0.5) 90%,
+      rgba(177, 193, 233, 0.1) 100%
+    );
+
     & img {
-      position: absolute;
-      top: 55px;
-      left: 30px;
       width: 50px;
     }
   }

@@ -1,9 +1,10 @@
 import http from "../utils/axios";
+const urlBase = "/cards";
 
 // URL /cards
 const getCards = async () => {
   try {
-    const url = "/cards";
+    const url = urlBase;
     const payload = await http("get", url);
     return payload.data;
   } catch (error) {
@@ -13,7 +14,7 @@ const getCards = async () => {
 
 const addCard = async (data) => {
   try {
-    const url = "/cards";
+    const url = urlBase;
     const payload = await http("post", url, data);
     return payload.data;
   } catch (error) {
@@ -29,7 +30,7 @@ const editCard = async (data) => {
       cardNumber: data.cardNumber,
       expDate: data.expDate,
     };
-    const url = `/cards/${data.id}`;
+    const url = `${urlBase}/${data.id}`;
     const payload = await http("put", url, newData);
     return payload.data;
   } catch (error) {
@@ -39,7 +40,7 @@ const editCard = async (data) => {
 
 const getCardById = async (id) => {
   try {
-    const url = `/cards/${id}`;
+    const url = `${urlBase}/${id}`;
     const payload = await http("get", url);
     return payload.data;
   } catch (error) {
@@ -49,7 +50,7 @@ const getCardById = async (id) => {
 
 const deleteCard = async (id) => {
   try {
-    const url = `/cards/${id}`;
+    const url = `${urlBase}/${id}`;
     const payload = await http("delete", url);
     return payload.data;
   } catch (error) {

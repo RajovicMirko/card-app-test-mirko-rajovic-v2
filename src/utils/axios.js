@@ -7,7 +7,8 @@ const http = async (method = null, url = null, data = null) => {
   if (url) request["url"] = url;
   if (data) request["data"] = data;
 
-  return await axios(request);
+  const result = await axios(request);
+  return result;
 };
 
 export default http;
